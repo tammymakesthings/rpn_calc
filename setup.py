@@ -37,6 +37,6 @@ setup(
     ],
 
     entry_points = {
-        'console_scripts': ['rpn_calc=rpn_calc.CalcRepl:repl'],
+        'console_scripts': ['rpn_calc=rpn_calc.CalcRepl:shell'],
     }.
 )

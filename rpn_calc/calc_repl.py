@@ -2,13 +2,18 @@ from calc_lexer import CalcLexer
 from calc_main import CalcMain
 from calc_config import CalcConfig
 from calc_version import *
+import argparse
 
 class CalcRepl:
 
     def __init__(self, Verbose=False, Debug=False):
-        self.verbose = Verbose
-        self.debug = Debug
         self.read_config()
+
+        if Verbose is True:
+            self.verbose = True
+        if Debug is True:
+            self.debug = True
+
         self.calc = CalcMain()
         self.repl()
 
@@ -116,6 +121,15 @@ class CalcRepl:
                 self.do_exit()
         self.do_exit()
 
+    @staticmethod
+    def shell():
+        parser = argparse.ArgumentParser(description='Simple RPN Calculator.')
+        parser.add_argument('-v', '--verbose', help='Print the full stack after each calculation.', action='store_true')
+        parser.add_argument('-d', '--debug', help='Print additional debugging output.', action='store_true')
+        args = parser.parse_args()
+        print(args)
+        repl = CalcRepl(Verbose = args.verbose, Debug = args.debug)
+        repl.repl()
+
 if __name__ == "__main__":
-    repl = CalcRepl()
-    repl.repl()
+    CalcRepl.shell()
