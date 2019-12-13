@@ -1,0 +1,6 @@
+include LICENSE
+include Makefile
+include Pipfile
+include README.rst
+include docs/*
+include tests/*
