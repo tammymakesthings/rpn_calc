@@ -4,6 +4,12 @@ from calc_config import CalcConfig
 from calc_version import *
 import argparse
 
+"""
+.. class:: CalcRepl
+   :synopsis: Provides an interactive REPL for interacting with the calculator.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 class CalcRepl:
 
     def __init__(self, Verbose=False, Debug=False):

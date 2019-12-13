@@ -1,5 +1,11 @@
 from sly import Lexer
 
+"""
+.. class:: CalcLexer
+   :synopsis: sly lexer for parsing input to the calculator.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 class CalcLexer(Lexer):
     tokens = {
         ID,

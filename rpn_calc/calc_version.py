@@ -1,3 +1,9 @@
+"""
+.. module:: CalcVersion
+   :synopsis:Defines the calculator version number.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 
 _RPN_CALC_MAJOR = 0
 _RPN_CALC_MINOR = 0

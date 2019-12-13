@@ -2,13 +2,22 @@ import os.path
 from os import path
 import yaml
 
+"""
+.. class:: CalcConfig
+   :synopsis: Parses the calculator configuration file and sets options,
+              or provides defaults if the configuration file is not found.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 class CalcConfig:
+
+    DEFAULT_CONFIG_FILE_LOCATION = os.path.expanduser("~/.rpn_calc.yaml")
 
     def __init__(self, config_file=None):
         if config_file and os.path.exists(config_file):
             self.config_file = config_file
-        elif os.path.exists(os.path.expanduser("~/.rpn_calc.yaml")):
-            self.config_file = os.path.expanduser("~/.rpn_calc.yaml")
+        elif os.path.exists(DEFAULT_CONFIG_FILE_LOCATION):
+            self.config_file = DEFAULT_CONFIG_FILE_LOCATION
         else:
             self.config_file = None
         self.did_use_defaults = False

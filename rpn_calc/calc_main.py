@@ -5,13 +5,18 @@ from collections import namedtuple
 
 import math
 
+"""
+.. class:: CalcMain
+   :synopsis: The main implementation module for the calculator.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 class CalcMain:
     def __init__(self, debug=False, verbose=False):
         self.stack = list()
         self.lexer = CalcLexer()
         self.debug = debug
         self.verbose = verbose
-
 
     def stack_push(self, term):
         self.stack.append(float(term))

@@ -1,5 +1,11 @@
 from math import factorial
 
+"""
+.. class:: MathHelpers
+   :synopsis: Math helper functions used by the calculator.
+
+.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+"""
 class MathHelpers:
 
     @staticmethod
