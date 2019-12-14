@@ -3,21 +3,22 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+************************************
 Welcome to rpn_calc's documentation!
-====================================
+************************************
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
 What is rpn_calc?
------------------
+=================
 
 Why another RPN calculator?
----------------------------
+===========================
 
 The Core rpn_calc Calculator
-----------------------------
+============================
 
 .. automodule:: rpn_calc
 
@@ -27,13 +28,12 @@ The Core rpn_calc Calculator
 .. autoclass:: MathHelpers
 
 The rpn_calc Command Line Interface
------------------------------------
+===================================
 .. autoclass:: CalcRepl
 
 
 Indices and tables
 ==================
-
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`

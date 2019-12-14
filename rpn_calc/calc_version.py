@@ -1,8 +1,8 @@
 """
-.. module:: CalcVersion
-   :synopsis:Defines the calculator version number.
+.. module:: rpn_calc
+    :synopsis: Simple RPN calculator with a sly-based parser.
 
-.. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
+    .. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
 """
 
 _RPN_CALC_MAJOR = 0
