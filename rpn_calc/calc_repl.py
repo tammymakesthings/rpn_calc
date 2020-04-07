@@ -111,8 +111,10 @@ class CalcRepl:
         if all_levels:
             print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack_repr()}\n")
         else:
-            print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack[-1]}\n")
-
+            if self.calc.stack_depth() > 0:
+                print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack[-1]}\n")
+            else:
+                print(f"{prefix}[0]\n")
 
     def handle_inline_cmd(self, tok):
         """Handle REPL commands.
