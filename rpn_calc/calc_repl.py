@@ -203,6 +203,3 @@ class CalcRepl:
         repl = CalcRepl(Verbose = args.verbose, Debug = args.debug)
         repl.repl()
 
-
-if __name__ == "__main__":
-    CalcRepl.shell()
