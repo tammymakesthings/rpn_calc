@@ -1,0 +1,46 @@
+[build-system]
+requires = [ "poetry_core>=1.0.0" ]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "rpn_calc"
+version = "0.5.0"
+description = "A simple RPN calculator in Python"
+license = "MIT"
+authors = [
+  "Tammy Cravit <tammymakesthings@gmail.com>"
+]
+readme = "README.md"
+homepage = ""
+documentation = ""
+repository = "https://github.com/tammymakesthings/rpn_calc"
+keywords = [
+  "rpn",
+  "calculator",
+  "math"
+]
+classifiers = [
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Math :: Calculators",
+]
+packages = [
+  { include = "rpn_calc" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+sly = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-cov = "*"
+
+[tool.poetry.scripts]
+poetry = 'poetry.console:run'
+
+[tool.poetry.urls]
+"Bug Tracker" = "https://github.com/tammymakesthings/rpn_calc/issues"
