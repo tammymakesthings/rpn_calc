@@ -29,6 +29,7 @@ pytest-bdd = "^5.0.0"
 pytest-cov = "^3.0.0"
 pytest-helper = "^0.2.2"
 pytest-mypy = "^0.8.1"
+pytest-fixtures = "^0.1.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
