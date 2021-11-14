@@ -2,11 +2,14 @@
 # Makefile for Python projects
 ##############################################################################
 
-PYTEST ?= $(shell which pytest)
+PYTEST ?= $(shell which poetry) run pytest
 POETRY ?= $(shell which poetry)
 PYTHON ?= $(shell which python)
 
 PROJECT_ROOT   := $(PWD)
+PYTEST_ARGS    := --markers --exitfirst --color=auto \
+	--junit-xml=$(PROJECT_ROOT)/junit.xml \
+	--rootdir=$(PROJECT_ROOT)
 
 PYTHON_SRC     := $(shell find $(PROJECT_ROOT)/src -name '*.py' -print)
 PYTHON_TESTS   := $(shell find $(PROJECT_ROOT)/tests -name '*.py' -print)
@@ -21,7 +24,7 @@ all: test
 build: $(PROJECT_ROOT)/.build.timestamp
 
 test: $(PYTHON_SRC) $(PYTHON_TESTS) poetry.lock
-	$(POETRY) run pytest $(PROJECT_ROOT)/tests
+	$(POETRY) run pytest $(PYTEST_ARGS) $(PROJECT_ROOT)/tests
 
 $(PROJECT_ROOT)/.build.timestamp: $(PYTHON_SRC) $(PYTHON_TESTS) $(DOC_FILES) $(ROOT_DOC_FILES) poetry.lock
 	$(POETRY) build
