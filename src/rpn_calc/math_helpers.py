@@ -1,9 +1,11 @@
 from math import factorial
 
+
 class MathHelpers:
     """Mathematic helper functions used by the calculator. This class is not
     instantiated, so any methods added here should be tagged with the
     `@staticmethod` decorator."""
+
 
     @staticmethod
     def ncr(nval, rval):
@@ -16,11 +18,19 @@ class MathHelpers:
 
         Returns:
             int: The number of possible unique combinations."""
+        
         n = int(nval)
         r = int(rval)
+
+        # If the user got the arguments backwards, swap them. We're helpful 
+        # that way.
+        if (r > n):
+            n, r = r, n
+            
         npr = factorial(n) // factorial(n-r)
         ncr = npr // factorial(r)
         return ncr
+
 
     @staticmethod
     def npr(nval, rval):
@@ -33,7 +43,15 @@ class MathHelpers:
 
         Returns:
             int: The number of possible permutations."""
+            
         n = int(nval)
         r = int(rval)
+
+        # If the user got the arguments backwards, swap them. We're helpful 
+        # that way.
+
+        if (r > n):
+            n, r = r, n
+
         npr = factorial(n) // factorial(n-r)
         return npr
