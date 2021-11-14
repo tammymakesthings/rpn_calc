@@ -6,6 +6,10 @@
 	],
 	"settings": {
 		"files.exclude": {
+			"**/.clj-kondo": true,
+			"**/.lsp": true,
+			"**/.coverage": true,
+			"**/coverage.xml": true,
 			"**/.git": true,
 			"**/.svn": true,
 			"**/.hg": true,
@@ -22,7 +26,7 @@
 		},
 		"python.testing.pytestEnabled": true,
 		"python.testing.pytestPath": "poetry run pytest",
-		"python.pythonPath": "poetry run python",
+		"python.pythonPath": "/Users/tammy/Library/Caches/pypoetry/virtualenvs/rpn-calc-FW2U8wbH-py3.10/bin/python",
 		"python.terminal.activateEnvironment": true,
 		"python.terminal.activateEnvInCurrentTerminal": true,
 		"pythonREPL.environmentActivationCommand": "poetry shell",

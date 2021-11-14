@@ -31,13 +31,17 @@ $(PROJECT_ROOT)/.build.timestamp: $(PYTHON_SRC) $(PYTHON_TESTS) $(DOC_FILES) $(R
 	$(POETRY) build
 	touch $(PROJECT_ROOT)/.build.timestamp
 
+coverage: $(PROJECT_ROOT)/coverage.rc $(PROJECT_ROOT)/pyproject.toml $(PYTHON_SRC) $(PYTHON_TESTS)
+	$(POETRY) run pytest $(PYTEST_ARGS) $(PROJECT_ROOT)/tests
+	open coverage/index.html
+
 release: $(PROJECT_ROOT)/.build.timestamp
 	$(POETRY) publish
 
 clean:
 	rm -f dist/*.whl dist/*.tar.gz
 
-.PHONY: all build edit
+.PHONY: all build edit coverage
 
 .DEFAULT: all
 
