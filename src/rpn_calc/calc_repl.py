@@ -1,7 +1,3 @@
-from calc_lexer import CalcLexer
-from calc_main import CalcMain
-from calc_config import CalcConfig
-from calc_version import *
 import argparse
 
 """
@@ -203,6 +199,3 @@ class CalcRepl:
         repl = CalcRepl(Verbose = args.verbose, Debug = args.debug)
         repl.repl()
 
-
-if __name__ == "__main__":
-    CalcRepl.shell()

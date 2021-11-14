@@ -1,6 +1,3 @@
-from calc_lexer import CalcLexer
-from calc_version import *
-from math_helpers import *
 from collections import namedtuple
 
 import math
