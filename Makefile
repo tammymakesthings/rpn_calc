@@ -19,6 +19,9 @@ POETRY_FILE   := $(PROJECT_ROOT)/pyproject.toml
 
 all: test
 
+edit:
+	code "$(PROJECT_ROOT)/rpn_calc.code-workspace"
+
 build: $(PROJECT_ROOT)/.build.timestamp
 
 test: $(PYTHON_SRC) $(PYTHON_TESTS) poetry.lock
@@ -34,4 +37,7 @@ release: $(PROJECT_ROOT)/.build.timestamp
 clean:
 	rm -f dist/*.whl dist/*.tar.gz
 
-.PHONY: all build
+.PHONY: all build edit
+
+.DEFAULT: all
+
