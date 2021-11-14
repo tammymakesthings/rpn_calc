@@ -7,9 +7,7 @@ POETRY ?= $(shell which poetry)
 PYTHON ?= $(shell which python)
 
 PROJECT_ROOT   := $(PWD)
-PYTEST_ARGS    := --markers --exitfirst --color=auto \
-	--junit-xml=$(PROJECT_ROOT)/junit.xml \
-	--rootdir=$(PROJECT_ROOT)
+PYTEST_ARGS    ?=
 
 PYTHON_SRC     := $(shell find $(PROJECT_ROOT)/src -name '*.py' -print)
 PYTHON_TESTS   := $(shell find $(PROJECT_ROOT)/tests -name '*.py' -print)

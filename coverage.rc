@@ -1,0 +1,17 @@
+[paths]
+source =
+    src
+
+[report]
+sort = Name
+show_missing = True
+skip_empty = True
+
+[html]
+directory = coverage
+
+[xml]
+output = coverage.xml
+
+[json]
+output = coverage.json
