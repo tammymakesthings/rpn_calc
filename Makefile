@@ -20,9 +20,6 @@ all: test
 
 build: $(PROJECT_ROOT)/.build.timestamp
 
-poetry.lock: $(POETRY_FILE)
-	$(POETRY) update
-
 test: $(PYTHON_SRC) $(PYTHON_TESTS) poetry.lock
 	$(POETRY) run pytest $(PROJECT_ROOT)/tests
 
