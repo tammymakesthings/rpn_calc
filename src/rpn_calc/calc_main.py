@@ -74,7 +74,8 @@ class CalcMain:
         """Return a string representation of the contents of the stack.
 
         returns:
-            str:    The current contents of the stack, in human-readable form."""
+            str:    The current contents of the stack, in human-readable form.
+        """
         return ", ".join(map(str, self.stack))
 
     def check_arity(self, arity):

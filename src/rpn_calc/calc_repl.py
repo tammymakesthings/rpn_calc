@@ -57,7 +57,9 @@ class CalcRepl:
         """Print the calculator version number and the settings of the Debug
         and Verbose flags."""
 
-        print(f"Version {RPN_CALC_VERSION}, Debug={self.debug}, Verbose={self.verbose}")
+        print(
+            f"Version {RPN_CALC_VERSION}, Debug={self.debug}, Verbose={self.verbose}"
+        )
 
     def print_banner(self):
         """Print the REPL startup banner"""
@@ -95,7 +97,9 @@ class CalcRepl:
         print("")
         print("Inline helper commands:")
         print("   !STACK   - print contents of stack")
-        print("   !VERBOSE - print full stack after every op instead of bottom element")
+        print(
+            "   !VERBOSE - print full stack after every op instead of bottom element"
+        )
         print("   !DEBUG   - print debugging information during parsing")
         print("   !HELP    - print this help message")
         print("   !QUIT    - exit the program")
@@ -116,10 +120,14 @@ class CalcRepl:
             prefix (str):       If not empty, each line of the output will be
                                 preceded by this text."""
         if all_levels:
-            print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack_repr()}\n")
+            print(
+                f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack_repr()}\n"
+            )
         else:
             if self.calc.stack_depth() > 0:
-                print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack[-1]}\n")
+                print(
+                    f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack[-1]}\n"
+                )
             else:
                 print(f"{prefix}[0]\n")
 
