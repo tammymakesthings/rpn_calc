@@ -15,6 +15,8 @@ import sys, os
 file_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(file_path, "..", "src"))
 
+import tomli
+
 from rpn_calc.calc_version import (
     _RPN_CALC_MAJOR,
     _RPN_CALC_MINOR,
@@ -49,3 +51,14 @@ class TestRPNCalcVersion:
             f"{_RPN_CALC_MAJOR}.{_RPN_CALC_MINOR}.{_RPN_CALC_REVISION}"
         )
         assert RPN_CALC_VERSION == expected_version_string
+
+    def test_version_matches_toml(self):
+        __config_dict: dict
+
+        with open(
+            os.path.join(os.path.dirname(__file__), "..", "pyproject.toml"),
+            "rb",
+        ) as f:
+            __config_dict = tomli.load(f)
+        poetry_version = __config_dict["tool"]["poetry"]["version"]
+        assert RPN_CALC_VERSION == poetry_version

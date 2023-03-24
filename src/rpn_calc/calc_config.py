@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019-2023, Tammy Cravit
+#
+# SPDX-License-Identifier: MIT
+
 import os.path
 from os import path
 import yaml
