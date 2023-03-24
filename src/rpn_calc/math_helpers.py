@@ -5,6 +5,7 @@ class MathHelpers:
     instantiated, so any methods added here should be tagged with the
     `@staticmethod` decorator."""
 
+
     @staticmethod
     def ncr(nval, rval):
         """Calculate the number of combinations (nCr) given the size of the
@@ -21,6 +22,7 @@ class MathHelpers:
         npr = factorial(n) // factorial(n-r)
         ncr = npr // factorial(r)
         return ncr
+
 
     @staticmethod
     def npr(nval, rval):

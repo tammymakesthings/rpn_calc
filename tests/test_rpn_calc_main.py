@@ -10,11 +10,13 @@
 .. version: 0.0.2
 """
 
-__all__ = [
-    "calc_config",
-    "calc_lexer",
-    "calc_main",
-    "calc_repl",
-    "calc_version",
-    "math_helpers",
-]
+import sys, os
+
+file_path = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(file_path, '..', 'src'))
+
+import pytest
+
+class TestRPNCalcMain:
+    pass
+    

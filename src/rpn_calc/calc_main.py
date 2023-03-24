@@ -1,9 +1,12 @@
+import math
+from collections import namedtuple
+
+
 from calc_lexer import CalcLexer
 from calc_version import *
 from math_helpers import *
-from collections import namedtuple
 
-import math
+
 
 """
 .. module:: rpn_calc
@@ -11,6 +14,7 @@ import math
 
     .. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
 """
+
 
 class CalcMain:
     """The main class for the rpn_calc calculator.
@@ -108,13 +112,13 @@ class CalcMain:
         op1 = self.stack_pop()
         op2 = self.stack_pop()
 
-        if tok.type == 'PLUS':
+        if 'PLUS' == tok.type:
             self.stack_push(op1 + op2)
-        elif tok.type == 'MINUS':
+        elif 'MINUS' == tok.type:
             self.stack_push(op1 - op2)
-        elif tok.type == 'TIMES':
+        elif 'TIMES' == tok.type:
             self.stack_push(op1 * op2)
-        elif tok.type == 'DIV':
+        elif 'DIV' == tok.type:
             self.stack_push(op1 / op2)
 
 
@@ -128,25 +132,25 @@ class CalcMain:
         args:
             tok (token):    The token read by the parser"""
 
-        if tok.value == 'SIN':
+        if 'SIN' == tok.value:
             self.stack_push(math.sin(self.stack_pop()))
-        elif tok.value == 'COS':
+        elif 'COS' == tok.value:
             self.stack_push(math.cos(self.stack_pop()))
-        elif tok.value == 'TAN':
+        elif 'TAN' == tok.value:
             self.stack_push(math.tan(self.stack_pop()))
-        elif tok.value == 'SQRT':
+        elif 'SQRT' == tok.value:
             self.stack_push(math.sqrt(self.stack_pop()))
 
-        elif tok.value == 'EXP':
+        elif 'EXP' == tok.value:
             base = self.stack_pop()
             exp  = self.stack_pop()
             self.stack_push(math.pow(base, exp))
-        elif tok.value == 'NCR':
+        elif 'NCR' == tok.value:
             rval = self.stack_pop()
             nval = self.stack_pop()
             ncr = MathHelpers.ncr(nval, rval)
             self.stack_push(ncr)
-        elif tok.value == 'NPR':
+        elif 'NPR' == tok.value:
             rval = self.stack_pop()
             nval = self.stack_pop()
             npr = MathHelpers.npr(nval, rval)
@@ -173,26 +177,26 @@ class CalcMain:
         +-----------+---------------------+----------------------+
         """
 
-        if tok.value == 'DUP':
+        if 'DUP' == tok.value:
             n = self.stack_pop()
             self.stack_push(n)
             self.stack_push(n)
-        elif tok.value == 'DROP':
+        elif 'DROP' == tok.value:
             self.stack_pop()
-        elif tok.value == 'SWAP':
+        elif 'SWAP' == tok.value:
             x = self.stack_pop()
             y = self.stack_pop()
             self.stack_push(y)
             self.stack_push(x)
-        elif tok.value == 'ROLL':
+        elif 'ROLL' == tok.value:
             l = self.stack[:-1]
             l.insert(0, self.stack[-1])
             self.stack = l
-        elif tok.value == 'ROLLD':
+        elif 'ROLLD' == tok.value:
             l = self.stack[1:]
             l.append(self.stack[0])
             self.stack = l
-        elif tok.value == 'DEPTH':
+        elif 'DEPTH' == tok.value:
             self.stack_push(self.stack_depth())
 
 
@@ -211,22 +215,22 @@ class CalcMain:
         returns:
             bool:   True if the token was handled, False otherwise."""
 
-        if tok.type == 'NUMBER':
+        if 'NUMBER' == tok.type:
             self.stack_push(tok.value)
             return True
         elif tok.type in ('PLUS', 'MINUS', 'TIMES', 'DIV'):
             if self.check_arity(2):
                 self.handle_basic_op(tok)
             return True
-        elif tok.type == 'ARITY1FUNC':
+        elif 'ARITY1FUNC' == tok.type:
             if self.check_arity(1):
                 self.handle_function(tok)
             return True
-        elif tok.type == 'ARITY2FUNC':
+        elif 'ARITY2FUNC' == tok.type:
             if self.check_arity(2):
                 self.handle_function(tok)
             return True
-        elif tok.type == 'STACKOP':
+        elif 'STACKOP' == tok.type:
             self.handle_stackop(tok)
             return True
         return False

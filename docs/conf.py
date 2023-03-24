@@ -18,11 +18,11 @@
 # -- Project information -----------------------------------------------------
 
 project = 'rpn_calc'
-copyright = '2019, Tammy Cravit'
+copyright = '2019-2023, Tammy Cravit'
 author = 'Tammy Cravit'
 
 # The full version, including alpha/beta/rc tags
-release = '0.0.1'
+release = '0.0.2'
 
 
 # -- General configuration ---------------------------------------------------
