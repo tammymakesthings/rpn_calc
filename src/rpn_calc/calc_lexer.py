@@ -7,6 +7,7 @@ from sly import Lexer
     .. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
 """
 
+
 class CalcLexer(Lexer):
     """Lexer for the rpn_calc calculator.
 
@@ -57,49 +58,53 @@ class CalcLexer(Lexer):
     tokens = {
         ID,
         NUMBER,
-        PLUS, MINUS, TIMES, DIV,
-        ARITY1FUNC, ARITY2FUNC,
+        PLUS,
+        MINUS,
+        TIMES,
+        DIV,
+        ARITY1FUNC,
+        ARITY2FUNC,
         STACKOP,
-        INLINE_CMD
+        INLINE_CMD,
     }
     """str: Classes of tokens recognized by the lexer"""
 
-    ignore = ' \t\n'
+    ignore = " \t\n"
     """str: characters ignored by the lexer"""
 
-    NUMBER = r'\-?\d+([\.]\d+)?'
+    NUMBER = r"\-?\d+([\.]\d+)?"
     """str: regex to identify numbers"""
 
-    ID     = r'[a-zA-Z_!][a-zA-Z0-9_!]*'
+    ID = r"[a-zA-Z_!][a-zA-Z0-9_!]*"
     """str: regex to identity other tokens; they're subcategorized later"""
 
-    ID['SIN']      = ARITY1FUNC
-    ID['COS']      = ARITY1FUNC
-    ID['TAN']      = ARITY1FUNC
-    ID['SQRT']     = ARITY1FUNC
+    ID["SIN"] = ARITY1FUNC
+    ID["COS"] = ARITY1FUNC
+    ID["TAN"] = ARITY1FUNC
+    ID["SQRT"] = ARITY1FUNC
 
-    ID['EXP']      = ARITY2FUNC
-    ID['NCR']      = ARITY2FUNC
-    ID['NPR']      = ARITY2FUNC
+    ID["EXP"] = ARITY2FUNC
+    ID["NCR"] = ARITY2FUNC
+    ID["NPR"] = ARITY2FUNC
 
-    ID['DUP']      = STACKOP
-    ID['SWAP']     = STACKOP
-    ID['DROP']     = STACKOP
-    ID['ROLL']     = STACKOP
-    ID['ROLLD']    = STACKOP
-    ID['DEPTH']    = STACKOP
+    ID["DUP"] = STACKOP
+    ID["SWAP"] = STACKOP
+    ID["DROP"] = STACKOP
+    ID["ROLL"] = STACKOP
+    ID["ROLLD"] = STACKOP
+    ID["DEPTH"] = STACKOP
 
-    ID['!STACK']   = INLINE_CMD
-    ID['!VERSION'] = INLINE_CMD
-    ID['!VERBOSE'] = INLINE_CMD
-    ID['!DEBUG']   = INLINE_CMD
-    ID['!QUIT']    = INLINE_CMD
-    ID['!HELP']    = INLINE_CMD
+    ID["!STACK"] = INLINE_CMD
+    ID["!VERSION"] = INLINE_CMD
+    ID["!VERBOSE"] = INLINE_CMD
+    ID["!DEBUG"] = INLINE_CMD
+    ID["!QUIT"] = INLINE_CMD
+    ID["!HELP"] = INLINE_CMD
 
-    PLUS           = r'\+'
-    MINUS          = r'\-'
-    TIMES          = r'\*'
-    DIV            = r'\/'
+    PLUS = r"\+"
+    MINUS = r"\-"
+    TIMES = r"\*"
+    DIV = r"\/"
 
     def error(self, t):
         """Print an error message when an unrecognized token is encountered
@@ -107,5 +112,5 @@ class CalcLexer(Lexer):
         Args:
             t (str): The unrecognized token"""
 
-        print('Line %d: Bad character %r' % (self.lineno, t.value[0]))
+        print("Line %d: Bad character %r" % (self.lineno, t.value[0]))
         self.index += 1

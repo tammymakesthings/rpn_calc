@@ -13,7 +13,6 @@
 import sys, os
 
 file_path = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(file_path, '..', 'src'))
+sys.path.insert(0, os.path.join(file_path, "..", "src"))
 
 import pytest
-

@@ -2,6 +2,7 @@ import os.path
 from os import path
 import yaml
 
+
 class CalcConfig:
     """
     The configuration file parser for the calculator. Raeds the YAML-based
@@ -13,7 +14,7 @@ class CalcConfig:
     """
 
     def __init__(self, config_file=None):
-        """ Instantiate a new CalcConfig object and parse the configuration
+        """Instantiate a new CalcConfig object and parse the configuration
         file if present. If the configuration file cannot be found or read,
         default values are supplied and the instance variable ``did_use_defaults``
         is ser to true to indicate this.
@@ -40,16 +41,14 @@ class CalcConfig:
         else:
             self.default_config()
 
-
     def default_config(self):
         """Supply default values for the configuration options, in case the
         configuration file is not present."""
         self.config_values = {
-            'verbose': False,
-            'debug': False,
+            "verbose": False,
+            "debug": False,
         }
         self.did_use_defaults = True
-
 
     def read_config(self):
         """Read the configuration file if present. If the file is not found

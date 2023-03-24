@@ -7,7 +7,6 @@ from calc_version import *
 from math_helpers import *
 
 
-
 """
 .. module:: rpn_calc
     :synopsis: Simple RPN calculator with a sly-based parser.
@@ -29,7 +28,6 @@ class CalcMain:
     stack is maintained as an instance variable, so multiple calls to
     ``calculate`` will use the same stack."""
 
-
     def __init__(self, debug=False, verbose=False):
         """Create a new instance of the calculator.
 
@@ -44,7 +42,6 @@ class CalcMain:
         self.debug = debug
         self.verbose = verbose
 
-
     def stack_push(self, term):
         """Push a number onto the stack. Numbers will be converted to float
         before being pushed onto the stack.
@@ -52,7 +49,6 @@ class CalcMain:
         args:
             term (float):   The number to push onto the stack."""
         self.stack.append(float(term))
-
 
     def stack_pop(self):
         """Pop a number from the stack. If the stack is empty, an error
@@ -67,7 +63,6 @@ class CalcMain:
             print("Error: Stack Underflow")
             return None
 
-
     def stack_depth(self):
         """Return the current stack depth.
 
@@ -75,14 +70,12 @@ class CalcMain:
             int:    The current stack depth."""
         return len(self.stack)
 
-
     def stack_repr(self):
         """Return a string representation of the contents of the stack.
 
         returns:
             str:    The current contents of the stack, in human-readable form."""
-        return ', '.join(map(str, self.stack))
-
+        return ", ".join(map(str, self.stack))
 
     def check_arity(self, arity):
         """Check that the stack contains enough elements to perform an operation.
@@ -94,11 +87,12 @@ class CalcMain:
             bool:   True if the stack contains enough elements to satisfy the
                     operation, False (and prints an error) otherwise."""
         if len(self.stack) < arity:
-            print(f'Error: Stack arity underflow (wanted {arity}, got {len(self.stack)})')
+            print(
+                f"Error: Stack arity underflow (wanted {arity}, got {len(self.stack)})"
+            )
             return False
         else:
             return True
-
 
     def handle_basic_op(self, tok):
         """Handle a basic math operation (add/subtract/multiply/divide).
@@ -112,15 +106,14 @@ class CalcMain:
         op1 = self.stack_pop()
         op2 = self.stack_pop()
 
-        if 'PLUS' == tok.type:
+        if "PLUS" == tok.type:
             self.stack_push(op1 + op2)
-        elif 'MINUS' == tok.type:
+        elif "MINUS" == tok.type:
             self.stack_push(op1 - op2)
-        elif 'TIMES' == tok.type:
+        elif "TIMES" == tok.type:
             self.stack_push(op1 * op2)
-        elif 'DIV' == tok.type:
+        elif "DIV" == tok.type:
             self.stack_push(op1 / op2)
-
 
     def handle_function(self, tok):
         """Handle other mathematical operations.
@@ -132,30 +125,29 @@ class CalcMain:
         args:
             tok (token):    The token read by the parser"""
 
-        if 'SIN' == tok.value:
+        if "SIN" == tok.value:
             self.stack_push(math.sin(self.stack_pop()))
-        elif 'COS' == tok.value:
+        elif "COS" == tok.value:
             self.stack_push(math.cos(self.stack_pop()))
-        elif 'TAN' == tok.value:
+        elif "TAN" == tok.value:
             self.stack_push(math.tan(self.stack_pop()))
-        elif 'SQRT' == tok.value:
+        elif "SQRT" == tok.value:
             self.stack_push(math.sqrt(self.stack_pop()))
 
-        elif 'EXP' == tok.value:
+        elif "EXP" == tok.value:
             base = self.stack_pop()
-            exp  = self.stack_pop()
+            exp = self.stack_pop()
             self.stack_push(math.pow(base, exp))
-        elif 'NCR' == tok.value:
+        elif "NCR" == tok.value:
             rval = self.stack_pop()
             nval = self.stack_pop()
             ncr = MathHelpers.ncr(nval, rval)
             self.stack_push(ncr)
-        elif 'NPR' == tok.value:
+        elif "NPR" == tok.value:
             rval = self.stack_pop()
             nval = self.stack_pop()
             npr = MathHelpers.npr(nval, rval)
             self.stack_push(npr)
-
 
     def handle_stackop(self, tok):
         """Handle stack manipulation operations.
@@ -177,28 +169,27 @@ class CalcMain:
         +-----------+---------------------+----------------------+
         """
 
-        if 'DUP' == tok.value:
+        if "DUP" == tok.value:
             n = self.stack_pop()
             self.stack_push(n)
             self.stack_push(n)
-        elif 'DROP' == tok.value:
+        elif "DROP" == tok.value:
             self.stack_pop()
-        elif 'SWAP' == tok.value:
+        elif "SWAP" == tok.value:
             x = self.stack_pop()
             y = self.stack_pop()
             self.stack_push(y)
             self.stack_push(x)
-        elif 'ROLL' == tok.value:
+        elif "ROLL" == tok.value:
             l = self.stack[:-1]
             l.insert(0, self.stack[-1])
             self.stack = l
-        elif 'ROLLD' == tok.value:
+        elif "ROLLD" == tok.value:
             l = self.stack[1:]
             l.append(self.stack[0])
             self.stack = l
-        elif 'DEPTH' == tok.value:
+        elif "DEPTH" == tok.value:
             self.stack_push(self.stack_depth())
-
 
     def handle_token(self, tok):
         """Handle a token from the input stream.
@@ -215,26 +206,25 @@ class CalcMain:
         returns:
             bool:   True if the token was handled, False otherwise."""
 
-        if 'NUMBER' == tok.type:
+        if "NUMBER" == tok.type:
             self.stack_push(tok.value)
             return True
-        elif tok.type in ('PLUS', 'MINUS', 'TIMES', 'DIV'):
+        elif tok.type in ("PLUS", "MINUS", "TIMES", "DIV"):
             if self.check_arity(2):
                 self.handle_basic_op(tok)
             return True
-        elif 'ARITY1FUNC' == tok.type:
+        elif "ARITY1FUNC" == tok.type:
             if self.check_arity(1):
                 self.handle_function(tok)
             return True
-        elif 'ARITY2FUNC' == tok.type:
+        elif "ARITY2FUNC" == tok.type:
             if self.check_arity(2):
                 self.handle_function(tok)
             return True
-        elif 'STACKOP' == tok.type:
+        elif "STACKOP" == tok.type:
             self.handle_stackop(tok)
             return True
         return False
-
 
     def calculate(self, input_line, result_only=True):
         """Tokenize a string of RPN and process it.
@@ -253,6 +243,6 @@ class CalcMain:
         if result_only:
             return self.stack[-1]
         else:
-            RpnCalcResult = namedtuple(RpnCalcResult, ['result', 'stack'])
+            RpnCalcResult = namedtuple(RpnCalcResult, ["result", "stack"])
             r = RpnCalcResult(result=self.stack[-1], stack=self.stack)
             return r

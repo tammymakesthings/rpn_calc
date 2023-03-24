@@ -14,9 +14,9 @@ from calc_version import *
     .. moduleauthor:: Tammy Cravit <tammymakesthings@gmail.com
 """
 
+
 class CalcRepl:
     """Provide an interactive interface to the calculator."""
-
 
     def __init__(self, Verbose=False, Debug=False):
         """Create an instance of the REPL class and read the configuration
@@ -39,21 +39,19 @@ class CalcRepl:
 
         self.calc = CalcMain()
 
-
     def read_config(self):
         """Read the configurtion file if present, or supply default values
         if it's not present."""
 
         config_parser = CalcConfig()
-        if config_parser.config_values['debug']:
+        if config_parser.config_values["debug"]:
             if config_parser.did_use_defaults:
                 print("* DEBUG: Used default config file values")
             else:
                 print(f"* DEBUG: Read config file: {config_parser.config_file}")
 
-        self.verbose = config_parser.config_values['verbose']
-        self.debug = config_parser.config_values['debug']
-
+        self.verbose = config_parser.config_values["verbose"]
+        self.debug = config_parser.config_values["debug"]
 
     def print_version(self):
         """Print the calculator version number and the settings of the Debug
@@ -61,47 +59,53 @@ class CalcRepl:
 
         print(f"Version {RPN_CALC_VERSION}, Debug={self.debug}, Verbose={self.verbose}")
 
-
     def print_banner(self):
         """Print the REPL startup banner"""
 
-        print('****************************************************************************')
-        print('*              rpn_calc: Simple RPN calculator with Sly lexer              *')
-        print('*                 Tammy Cravit, tammymakesthings@gmail.com                 *')
-        print('****************************************************************************')
-        print('')
+        print(
+            "****************************************************************************"
+        )
+        print(
+            "*              rpn_calc: Simple RPN calculator with Sly lexer              *"
+        )
+        print(
+            "*                 Tammy Cravit, tammymakesthings@gmail.com                 *"
+        )
+        print(
+            "****************************************************************************"
+        )
+        print("")
         self.print_version()
-        print('Type !HELP for help.')
-        print('')
-
+        print("Type !HELP for help.")
+        print("")
 
     def do_help(self):
         """Print a help message in response to the !HELP command."""
 
-        print('rpn_calc help:')
-        print('   - Input is in RPN format (see https://en.wikipedia.org/wiki/Reverse_Polish_notation)')
-        print('   - Whitespace is ignored')
-        print('   - Input is parsed on end of line')
-        print('')
-        print('Math operators (arity=2): + - * / EXP NCR NPR')
-        print('Math operators (arity=1): SIN COS TAN SQRT LOG LN')
-        print('Stack operators         : DUP DROP SWAP ROLL ROLLD DEPTH')
-        print('')
-        print('Inline helper commands:')
-        print('   !STACK   - print contents of stack')
-        print('   !VERBOSE - print full stack after every op instead of bottom element')
-        print('   !DEBUG   - print debugging information during parsing')
-        print('   !HELP    - print this help message')
-        print('   !QUIT    - exit the program')
-        print('')
-
+        print("rpn_calc help:")
+        print(
+            "   - Input is in RPN format (see https://en.wikipedia.org/wiki/Reverse_Polish_notation)"
+        )
+        print("   - Whitespace is ignored")
+        print("   - Input is parsed on end of line")
+        print("")
+        print("Math operators (arity=2): + - * / EXP NCR NPR")
+        print("Math operators (arity=1): SIN COS TAN SQRT LOG LN")
+        print("Stack operators         : DUP DROP SWAP ROLL ROLLD DEPTH")
+        print("")
+        print("Inline helper commands:")
+        print("   !STACK   - print contents of stack")
+        print("   !VERBOSE - print full stack after every op instead of bottom element")
+        print("   !DEBUG   - print debugging information during parsing")
+        print("   !HELP    - print this help message")
+        print("   !QUIT    - exit the program")
+        print("")
 
     def do_exit(self):
         """Exit the REPL in response to the !QUIT command."""
 
-        print('Exiting.')
+        print("Exiting.")
         exit(0)
-
 
     def print_stack(self, all_levels=False, prefix=""):
         """Print the contents of the stack in response to the !STACK command.
@@ -118,7 +122,6 @@ class CalcRepl:
                 print(f"{prefix}[{self.calc.stack_depth()}] {self.calc.stack[-1]}\n")
             else:
                 print(f"{prefix}[0]\n")
-
 
     def handle_inline_cmd(self, tok):
         """Handle immediate mode REPL commands.
@@ -142,30 +145,29 @@ class CalcRepl:
         +----------+--------------------------------------+
         """
 
-        if '!STACK' == tok.value:
-            self.print_stack(all_levels=True, prefix='STACK: ')
-        elif '!VERSION' == tok.value:
+        if "!STACK" == tok.value:
+            self.print_stack(all_levels=True, prefix="STACK: ")
+        elif "!VERSION" == tok.value:
             self.print_version()
-        elif '!VERBOSE' == tok.value:
-            self.calc.verbose = !self.calc.verbose
-            
+        elif "!VERBOSE" == tok.value:
+            self.calc.verbose = not self.calc.verbose
+
             if self.calc.verbose:
-                print('* Stack printing after each operation ENABLED')
+                print("* Stack printing after each operation ENABLED")
             else:
-                print('* Stack printing after each operation DISABLED')
-        elif '!DEBUG' == tok.value:
-            self.calc.debug = !self.calc.debug
+                print("* Stack printing after each operation DISABLED")
+        elif "!DEBUG" == tok.value:
+            self.calc.debug = not self.calc.debug
             if self.calc.debug:
-                print('* Debug printing ENABLED')
+                print("* Debug printing ENABLED")
             else:
-                print('* Debug printing DISABLED')
-        elif '!HELP' == tok.value:
+                print("* Debug printing DISABLED")
+        elif "!HELP" == tok.value:
             self.do_help()
-        elif '!QUIT' == tok.value:
+        elif "!QUIT" == tok.value:
             self.do_exit()
         else:
-            print(f'* Unrecognized Immediate Mode Command: #{tok}')
-
+            print(f"* Unrecognized Immediate Mode Command: #{tok}")
 
     def repl(self):
         """Run the calculator REPL."""
@@ -175,16 +177,18 @@ class CalcRepl:
         while True:
             was_inline_cmd = False
             try:
-                input_line = input('calc> ').upper()
+                input_line = input("calc> ").upper()
                 for tok in self.calc.lexer.tokenize(input_line):
                     if self.calc.handle_token(tok) == False:
                         if self.handle_inline_cmd(tok) == False:
-                            print(f'* Unhandled token: {tok}')
+                            print(f"* Unhandled token: {tok}")
                         else:
                             was_inline_cmd = True
 
                     if self.debug:
-                        print(f'* DEBUG: Tok was {tok}, stack is now {self.stack_repr()}')
+                        print(
+                            f"* DEBUG: Tok was {tok}, stack is now {self.stack_repr()}"
+                        )
                 if was_inline_cmd == False:
                     if self.verbose:
                         self.print_stack(all_levels=True)
@@ -195,16 +199,24 @@ class CalcRepl:
                 self.do_exit()
         self.do_exit()
 
-
     @staticmethod
     def shell():
         """Run the REPL from the command line."""
 
-        parser = argparse.ArgumentParser(description='Simple RPN Calculator.')
-        parser.add_argument('-v', '--verbose', help='Print the full stack after each calculation.', action='store_true')
-        parser.add_argument('-d', '--debug', help='Print additional debugging output.', action='store_true')
+        parser = argparse.ArgumentParser(description="Simple RPN Calculator.")
+        parser.add_argument(
+            "-v",
+            "--verbose",
+            help="Print the full stack after each calculation.",
+            action="store_true",
+        )
+        parser.add_argument(
+            "-d",
+            "--debug",
+            help="Print additional debugging output.",
+            action="store_true",
+        )
         args = parser.parse_args()
 
-        repl = CalcRepl(Verbose = args.verbose, Debug = args.debug)
+        repl = CalcRepl(Verbose=args.verbose, Debug=args.debug)
         repl.repl()
-
